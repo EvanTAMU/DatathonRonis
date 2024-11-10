@@ -1,17 +1,22 @@
-from os import listdir
+import os
 import streamlit as st
 import plotly.express as px
 import pandas as pd
 import matplotlib.pyplot as plt
 
+base_path = os.path.dirname(os.path.abspath(__file__))
 #First collect all the data
-path = '/Users/evanriekert/Downloads/Roni_s Challenge public/Provided Data [FINAL]/'
-datasets = listdir('Provided Data [FINAL]')
+relative_path = os.path.join(base_path, 'Provided Data [FINAL]')
+relative_path += '/'
+datasets = os.listdir(relative_path)
 dataPaths = []
-for i in range(len(datasets)):
-    dataPaths.append(path + datasets[i])
+for dataset in datasets:
+    # Append the full path to the dataset to the dataPaths list
+    dataPaths.append(os.path.join(relative_path, dataset))
+print(dataPaths)  # This will print the list of full dataset paths
+
 dateRange = f'{((datasets[0])[:-9])} - {(datasets[-1])[:-9]}'
-testdata = None
+
 dates = []
 lines = []
 orderList = [[]]
@@ -40,14 +45,13 @@ def streamLitRun(dishes,toppings,bowls):
     """
     <style>
     .stApp {
-        background-image: url("https://media.istockphoto.com/id/1473988115/vector/italian-pasta-seamless-pattern-isolated-on-green-background-macaroni-pasta.jpg?s=612x612&w=0&k=20&c=uI4AfYrmzPVApxDJm5ztfsQ1uPrQPl3hBRJhnGRO1I4=");
+        background-image: url("https://as1.ftcdn.net/v2/jpg/02/94/92/66/1000_F_294926617_oEET1oiV1VN94qz4NgWCdlCtICT9U6o8.jpg");
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
     }
     </style>
     """,
-    
     unsafe_allow_html=True
     )
 
