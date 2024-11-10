@@ -15,7 +15,7 @@ for dataset in datasets:
     dataPaths.append(os.path.join(relative_path, dataset))
 print(dataPaths)  # This will print the list of full dataset paths
 
-dateRange = f'{((datasets[0])[:-9])} - {(datasets[-1])[:-9]}'
+dateRange = '' # f'{((datasets[0])[:-9])} - {(datasets[-1])[:-9]}'
 
 dates = []
 lines = []
@@ -61,18 +61,18 @@ def streamLitRun(dishes,toppings,bowls):
         df_sorted = df.sort_values(by='Popularity', ascending=False)
 
         if chart_type == 'Bar Chart':
-            fig = px.bar(df_sorted, x='Dishes', y='Popularity', title=f'Amount of Dishes Ordered {dateRange} | Bar Chart')
+            fig = px.bar(df_sorted, x='Dishes', y='Popularity', title=f'Amount of Dishes Ordered{dateRange} | Bar Chart')
         else:
-            fig = px.pie(df_sorted, names='Dishes', values='Popularity', title=f'Amount of Dishes Ordered {dateRange} | Pie Chart')
+            fig = px.pie(df_sorted, names='Dishes', values='Popularity', title=f'Amount of Dishes Ordered{dateRange} | Pie Chart')
         st.plotly_chart(fig)
     elif chart_selection == 'Popular Mac and Cheese Toppings': # Fix the values when gotten
         chart_type = st.radio('Choose Radio Type:', ('Bar Chart','Pie Chart'))
         df_sorted = dfToppings.sort_values(by='# Ordered in range', ascending=False)
 
         if chart_type == 'Bar Chart':
-            fig = px.bar(df_sorted, x='Toppings', y='# Ordered in range', title=f'Most Popular Toppings {dateRange} | Bar Chart')
+            fig = px.bar(df_sorted, x='Toppings', y='# Ordered in range', title=f'Most Popular Toppings{dateRange} | Bar Chart')
         else:
-            fig = px.pie(df_sorted, names='Toppings', values='# Ordered in range', title=f'Most Popular Toppings {dateRange} | Pie Chart')
+            fig = px.pie(df_sorted, names='Toppings', values='# Ordered in range', title=f'Most Popular Toppings{dateRange} | Pie Chart')
         st.plotly_chart(fig)
     elif chart_selection == 'Popular Aggie \'Bowls\'': # Fix the values when gotten
         chart_type = st.radio('Choose Graph Type:', ('Bar Chart','Pie Chart'))
@@ -81,9 +81,9 @@ def streamLitRun(dishes,toppings,bowls):
 
 
         if chart_type == 'Bar Chart':
-            fig = px.bar(df_sorted, x='Bowls', y='# Ordered in range', title=f'Most Popular Bowls {dateRange} | Bar Chart')
+            fig = px.bar(df_sorted, x='Bowls', y='# Ordered in range', title=f'Most Popular Bowls{dateRange} | Bar Chart')
         else:
-            fig = px.pie(df_sorted, names='Bowls', values='# Ordered in range', title=f'Most Popular Bowls {dateRange} | Pie Chart')
+            fig = px.pie(df_sorted, names='Bowls', values='# Ordered in range', title=f'Most Popular Bowls{dateRange} | Pie Chart')
         st.plotly_chart(fig)
     #------------------------------
     elif chart_selection == 'Order Date Trends': #Working date thing
